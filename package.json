@@ -1,0 +1,27 @@
+{
+  "name": "mercado-libre-api",
+  "version": "0.1.0",
+  "description": "mercado libre api test",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/balusio/ml-POC.git"
+  },
+  "keywords": [
+    "ml",
+    "react",
+    "express"
+  ],
+  "author": "Jorge Manzano",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/balusio/ml-POC/issues"
+  },
+  "homepage": "https://github.com/balusio/ml-POC#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
