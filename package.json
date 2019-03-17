@@ -4,7 +4,7 @@
   "description": "mercado libre api test",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "api": "node api"
   },
   "repository": {
     "type": "git",
@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/balusio/ml-POC#readme",
   "dependencies": {
+    "axios": "^0.18.0",
     "express": "^4.16.4"
   }
 }
