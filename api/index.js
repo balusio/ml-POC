@@ -3,23 +3,37 @@ const app = express();
 const search_actions = require('./search-result-handlers');
 const axios = require('axios');
 const port = 8080;
+require('dotenv').config();
+const order_category =require('./search-result-handlers/category-order');
+
 // FIRST SEND QUERY PARAM FOR SEARCH
 app.get('/items', function (req, res) {
   if(req.query.hasOwnProperty('search')){
-    axios.get(`https://api.mercadolibre.com/sites/MLA/search?q=${req.query.search}`).then((response)=>{
+    axios.get(`${process.env.API_URL}sites/MLA/search?q=${req.query.search}`).then((response)=>{
+      let category_object;
       let itemsToReturn = response.data.results.slice(0, 4);
-      let sorted_elem = search_actions.filter_search(itemsToReturn);
-      res.send(sorted_elem);
+      
+      let filtered_search = {
+        categories: [],
+        items: search_actions.filter_search(itemsToReturn)
+      }
+      if(response.data.hasOwnProperty('filters') && response.data.filters.length > 0){
+        category_object = response.data.filters;
+      } else{
+        category_object = response.data.available_filters;
+      }
+      filtered_search.categories = order_category.sortCategory(category_object);
+      res.send(filtered_search);
     }).catch(err=>{
       console.log(err);
-      res.send(err);
+      //res.send(err);
       throw new Error("Api mercado libre inaccseible"); // Express will catch this on its own.
       
     });
+
   } else{
     res.send('error, búsqueda vacia');
   }
-
 
 });
 
