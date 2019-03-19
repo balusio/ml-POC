@@ -50,3 +50,6 @@ typings/
 
 # next.js build output
 .next
+
+#vscode
+.vscode
