@@ -9,17 +9,9 @@ function itemToSort(item){
       price: utils.setPrice(item.price,item.currency_id),
       shipping: item.shipping.free_shipping // shipping.free_shipping
     }
-
+  return sortedItem;
 };
 
-itemToSort.prototype.addQuantity = function(quantity){
-  let newElements = {
-    sold_quantity: quantity
-  }
-
-  Object.assign(this.sortedItem, newElements);
-
-}
 module.exports = itemToSort;
 
 

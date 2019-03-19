@@ -5,6 +5,7 @@ const itemActions = require('./item-result/');
 const order_category =require('./search-result/category-order');
 const axios = require('axios');
 const port = 8080;
+
 require('dotenv').config();
 // FIRST SEND QUERY PARAM FOR SEARCH
 app.get('/items', function (req, res) {
@@ -12,7 +13,6 @@ app.get('/items', function (req, res) {
     axios.get(`${process.env.API_URL}sites/MLA/search?q=${req.query.search}`).then((response)=>{
       let category_object;
       let itemsToReturn = response.data.results.slice(0, 4);
-      
       let filtered_search = {
         categories: [],
         items: serachActions.filter_search(itemsToReturn)
@@ -42,12 +42,11 @@ app.get('/items/:id', function (req, res) {
   let itemResponse;
   var itemProperties =  axios.get(`${process.env.API_URL}items/${req.params.id}`);
   var itemDescription = axios.get(`${process.env.API_URL}items/${req.params.id}/description/`);
-
   Promise.all([itemProperties, itemDescription]).then((response) => {
-    
     itemResponse = itemActions.productItem(response[0].data);
     itemResponse.description = response[1].data.plain_text;
     res.send(itemResponse);
+
   }).catch(err => console.error(err));
 
 });
