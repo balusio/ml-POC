@@ -1,8 +1,8 @@
 // @ts-nocheck
 const utils = require('./set-price');
-exports.itemToSort = function(item){
+function itemToSort(item){
   
-  const sortedItem = {
+  this.sortedItem = {
       id : item.id,
       title : item.title, // title
       picture : item.thumbnail,// thumbnail
@@ -10,6 +10,16 @@ exports.itemToSort = function(item){
       shipping: item.shipping.free_shipping // shipping.free_shipping
     }
 
-    return sortedItem;
 };
+
+itemToSort.prototype.addQuantity = function(quantity){
+  let newElements = {
+    sold_quantity: quantity
+  }
+
+  Object.assign(this.sortedItem, newElements);
+
+}
+module.exports = itemToSort;
+
 

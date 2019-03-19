@@ -1,11 +1,11 @@
 const express = require('express');
 const app = express();
-const search_actions = require('./search-result-handlers');
+const serachActions = require('./search-result');
+const itemActions = require('./item-result/');
+const order_category =require('./search-result/category-order');
 const axios = require('axios');
 const port = 8080;
 require('dotenv').config();
-const order_category =require('./search-result-handlers/category-order');
-
 // FIRST SEND QUERY PARAM FOR SEARCH
 app.get('/items', function (req, res) {
   if(req.query.hasOwnProperty('search')){
@@ -15,7 +15,7 @@ app.get('/items', function (req, res) {
       
       let filtered_search = {
         categories: [],
-        items: search_actions.filter_search(itemsToReturn)
+        items: serachActions.filter_search(itemsToReturn)
       }
       if(response.data.hasOwnProperty('filters') && response.data.filters.length > 0){
         category_object = response.data.filters;
@@ -39,7 +39,17 @@ app.get('/items', function (req, res) {
 
 /// USED PARAM URL FOR SENT
 app.get('/items/:id', function (req, res) {
-  res.send(`param id = ${req.params.id}`);  
-})
+  let itemResponse;
+  var itemProperties =  axios.get(`${process.env.API_URL}items/${req.params.id}`);
+  var itemDescription = axios.get(`${process.env.API_URL}items/${req.params.id}/description/`);
+
+  Promise.all([itemProperties, itemDescription]).then((response) => {
+    
+    itemResponse = itemActions.productItem(response[0].data);
+    itemResponse.description = response[1].data.plain_text;
+    res.send(itemResponse);
+  }).catch(err => console.error(err));
+
+});
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))

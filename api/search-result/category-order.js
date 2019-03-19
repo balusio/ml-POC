@@ -50,10 +50,8 @@ function getName(objElement){
 
 
 exports.sortCategory = function(filters) {
-    start();
     let foundedElements = recursiveValuesCat(filters);
     let names = getName(foundedElements);
-    end();
     return(names);
 
 };  
