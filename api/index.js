@@ -1,12 +1,22 @@
+/*
+la estructura deberia sera lgo como: 
+  1.- application general de entrada
+  2.- Routing para los items
+      2.1 controlador de datos y funciones para 
+        2.1.1. búsqueda
+        2.1.2. item
+  3.- Helpers de configuracioón global
+
+*/
 const express = require('express');
 const app = express();
 const serachActions = require('./search-result');
-const itemActions = require('./item-result/');
+const itemActions = require('./item-result');
 const order_category =require('./search-result/category-order');
 const axios = require('axios');
 const port = 8080;
-
 require('dotenv').config();
+
 // FIRST SEND QUERY PARAM FOR SEARCH
 app.get('/items', function (req, res) {
   if(req.query.hasOwnProperty('search')){
@@ -26,8 +36,7 @@ app.get('/items', function (req, res) {
       res.send(filtered_search);
     }).catch(err=>{
       console.log(err);
-      //res.send(err);
-      throw new Error("Api mercado libre inaccseible"); // Express will catch this on its own.
+      res.send(err);
       
     });
 

@@ -1,12 +1,25 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = {
   entry: './src/index.js',
   output: {
     path: __dirname + '/dist',
-    publicPath: '/',
+    publicPath: './',
     filename: 'bundle.js'
+  },
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin({
+        cache: true,
+        parallel: true,
+        sourceMap: false // set to true if you want JS source maps
+      }),
+      new OptimizeCSSAssetsPlugin({})
+    ]
   },
   // devServer configure
   devServer: {
@@ -23,27 +36,19 @@ module.exports = {
       },
       {
         test:/\.(s*)css$/,
-        exclude: /node_modules/,
         use:[{
           loader: MiniCssExtractPlugin.loader,
 					options: {
 						name:'style.css'
-					  }
+					}
         },
         'css-loader', 'sass-loader'],
+        exclude: /node_modules/
       },
       {
         test: /\.(png|svg|jpg|gif)$/,
-        exclude: /node_modules/,
-        
-        use: [{
-          loader: 'file-loader',
-          options: {
-            name: '[path][name].[ext]',
-            outputPath: 'assets/images',
-          }
-        }
-          
+        use: [
+          'file-loader'
         ]
       }
     ]
@@ -55,11 +60,11 @@ module.exports = {
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
       // both options are optional
-      path: path.resolve(__dirname, 'dist/'),
+      path:  'dist/',
       filename: 'css/style.css'
     })
  
   
   ],
-  devtool: 'inline-source-map'
+  devtool: 'false'
 };
