@@ -53,3 +53,7 @@ typings/
 
 #vscode
 .vscode
+
+#external
+ui/dist
+api/dist
