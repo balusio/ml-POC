@@ -1,5 +1,24 @@
-.search-bar{
+@import '../../styles/variables.scss';
+
+.container-search{
   width: 100%;
-  height: 65px;
-  background-color: yellow;
+  background-color: $primary-color;
+}
+.search-bar{
+  display: flex;
+  align-items: center;
+  flex-direction: row ;
+  flex-wrap: nowrap;
+  margin: 0 auto;
+  height: 56px;
+  
+}
+
+.logo{
+  width: $column-width;
+  img{
+    width: 50px;
+    position: relative;
+    top: 2px;
+  }
 }

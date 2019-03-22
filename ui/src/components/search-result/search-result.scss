@@ -1,0 +1,9 @@
+@import '../../styles/variables.scss';
+.search-wrapper{
+  background-color: #ffffff;
+  min-height: 500px;
+  display: flex;
+  margin: 0 auto;
+  flex-direction: column;
+  border-radius: $border-radius;
+}
