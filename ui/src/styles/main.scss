@@ -12,15 +12,23 @@ body,html{
   background-color:  $light-grey;
   font-family: $fall-back-font;
 }
+h1,h2,h3,h4,h5,h6,ul,li,nav{
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
 
+}
 .container{
   width: 100%;
   height: auto;
   display: block;
-  margin: 0 auto;
 }
+
 .wrapper{
-  width: 100%;
+  margin: 0 auto;
   max-width: $column-total * 10;
 }
 

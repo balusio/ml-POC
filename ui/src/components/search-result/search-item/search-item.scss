@@ -1,0 +1,48 @@
+@import '../../../styles/variables.scss';
+.search-result-element{
+  width: 100%;
+  display: flex;
+  flex-flow: row;
+  .img-elem-wrapper{
+    width: $column-total * 2;
+    margin: 16px;
+    img{
+      width: 180px;
+      height: 180px;
+      position: relative;
+      border-radius: 4px;
+
+    }
+  }
+  .text-elem-wrapper{
+    width: $column-total * 8;
+    .location-elem-wrapper{
+      display: flex;
+      flex-flow: row;
+      align-items: baseline;
+      margin: 35px 0  32px 0;
+      line-height: 0;
+      h3{
+        width: $column-total * 6;
+        font-size: 24px;
+        line-height: 23px;
+      }
+      .location-descp{
+        font-size: 12px;
+        color: $medium-grey;
+      }
+      
+      .free-shipping-icon{
+        background-image: '/assets/images/src/assets/ic_shipping@2x.png';
+        width: 40px;
+        height: 40px;
+        background-position: 0 0;
+        background-repeat: no-repeat;
+      }
+    }
+    .description-elem{
+      margin: 0;
+    }
+  }
+
+}
