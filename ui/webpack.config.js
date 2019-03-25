@@ -4,9 +4,10 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = {
   entry: './src/index.js',
   output: {
-    path: __dirname + '/dist',
+    path: __dirname + '/dist/js',
     publicPath: '/',
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    
   },
   // devServer configure
   devServer: {
@@ -18,8 +19,9 @@ module.exports = {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        use: 'babel-loader',
+        use: ['babel-loader'],
         exclude: /node_modules/
+        
       },
       {
         test:/\.(s*)css$/,
@@ -28,19 +30,18 @@ module.exports = {
           loader: MiniCssExtractPlugin.loader,
 					options: {
 						name:'style.css'
-					  }
+					}
         },
         'css-loader', 'sass-loader'],
       },
       {
         test: /\.(png|svg|jpg|gif)$/,
         exclude: /node_modules/,
-        
         use: [{
           loader: 'file-loader',
           options: {
             name: '[path][name].[ext]',
-            outputPath: 'assets/images',
+            outputPath:'assets/images'
           }
         }
           
