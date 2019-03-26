@@ -1,4 +1,4 @@
-@import './variables.scss';
+@import './commons.scss';
 
 *{
   box-sizing: border-box;
@@ -11,6 +11,7 @@ body,html{
   height: 100%;
   background-color:  $light-grey;
   font-family: $fall-back-font;
+  color: $dark-grey;
 }
 h1,h2,h3,h4,h5,h6,ul,li,nav{
   margin: 0;
@@ -20,6 +21,14 @@ h1,h2,h3,h4,h5,h6,ul,li,nav{
   font: inherit;
   vertical-align: baseline;
 
+}
+button{
+  border-color: transparent;
+  box-shadow: 0;
+  padding: 0;
+  &:hover{
+    cursor: pointer;
+  }
 }
 .container{
   width: 100%;

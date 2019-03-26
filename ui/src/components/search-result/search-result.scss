@@ -1,8 +1,5 @@
-@import '../../styles/variables.scss';
+@import '../../styles/commons.scss';
 .search-wrapper{
-  background-color: #ffffff;
-  display: flex;
-  margin: 0 auto;
+  @extend %blank-container;
   flex-direction: column;
-  border-radius: $border-radius;
 }

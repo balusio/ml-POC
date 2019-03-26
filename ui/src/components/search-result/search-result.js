@@ -11,7 +11,7 @@ class SearchResult extends Component {
     };
   }
   render() {
-    const elements = ['one', 'two', 'three'];
+    const elements = ['one', 'two', 'three','four'];
 
     const items = []
   

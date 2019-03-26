@@ -1,0 +1,8 @@
+
+%blank-container {
+  background-color: #ffffff;
+  display: flex;
+  margin: 0 auto ($base-margin * 2)  auto;
+  flex-direction: column;
+  border-radius: $border-radius;
+}

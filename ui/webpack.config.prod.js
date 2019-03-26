@@ -50,8 +50,8 @@ module.exports = {
         use: [{
             loader: 'file-loader',
             options: {
-              name: '[path][name].[ext]',
-              outputPath: 'assets/images',
+              name: '[name].[ext]',
+              outputPath:'assets/images'
             }
           }]
       }
