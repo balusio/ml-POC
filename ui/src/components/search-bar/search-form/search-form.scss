@@ -1,19 +1,16 @@
-@import '../../../styles/variables.scss';
+@import '../../../styles/commons.scss';
 
 .search-box{
   flex: auto;
-  max-width: $column-total *9;
   width: 100%;  
   height: 36px;
   display: flex;
   flex-flow: row;
   input{
     width: 100%;
-    max-width: 860px;
     height: 36px;
     padding: 0 15px;
     font-family: sans-serif;
-  
     border: 0;
     border-radius: $border-radius 0 0 $border-radius;
     font-size: 18px;
@@ -28,14 +25,9 @@
   button{
     width: 40px;
     height: 36px;
-    box-shadow: 0;
-    border-color: transparent;
     background-color: $light-grey;
     border-radius: 0 $border-radius $border-radius 0;
     font-size: 18px;
-    &:hover{
-      cursor: pointer;
-    }
     img{
       width: 18px;
       position: relative;

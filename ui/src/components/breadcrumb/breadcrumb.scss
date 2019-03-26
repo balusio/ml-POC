@@ -1,9 +1,9 @@
-@import '../../styles/variables.scss';
+@import '../../styles/commons.scss';
 .breadcrum-container{
   list-style-type: none;
   display: flex;
   flex-direction: row;
-  margin:16px 0;
+  margin: $base-margin auto;
   padding: 0;
   font-size: 14px;
   li {
