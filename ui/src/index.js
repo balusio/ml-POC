@@ -1,18 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import SearchBar from './components/search-bar/search-bar';
-import SearchResult from './components/search-result/search-result';
-import BreadCrumb from './components/breadcrumb/breadcrumb-list';
-import ItemDetail from './components/item/item-detail';
+import { HashRouter } from "react-router-dom";
+import App from './components/app';
 import './styles/main.scss';
 const title = 'My Minimal React Webpack Babel Setup';
 
 ReactDOM.render(
-  <div>
-  <SearchBar></SearchBar>
-  <BreadCrumb> </BreadCrumb>
-  <SearchResult></SearchResult> 
-  <ItemDetail></ItemDetail>
-  </div>,
+    <App />,
   document.getElementById('app')
-);
+);  

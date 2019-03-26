@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import SearchItem from './search-item/search-item';
 import './search-result.scss';
+import BreadCrumb from '../breadcrumb/breadcrumb-list';
 class SearchResult extends Component {
   constructor() {
     super();
@@ -19,11 +20,14 @@ class SearchResult extends Component {
       items.push(<SearchItem />)
     }
     return (
-      <section className="container wrapper">
-        <div className="search-wrapper"> 
-          {items}
-        </div>
-      </section>
+      <div>
+        <BreadCrumb />
+        <section className="container wrapper">
+          <div className="search-wrapper"> 
+            {items}
+          </div>
+        </section>
+      </div>
       
     );
   }

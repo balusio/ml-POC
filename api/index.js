@@ -17,6 +17,7 @@ const axios = require('axios');
 const port = 8080;
 require('dotenv').config();
 
+app.disable('x-powered-by');
 // FIRST SEND QUERY PARAM FOR SEARCH
 app.get('/items', function (req, res) {
   if(req.query.hasOwnProperty('search')){
