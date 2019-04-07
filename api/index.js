@@ -14,12 +14,20 @@ const serachActions = require('./search-result');
 const itemActions = require('./item-result');
 const order_category =require('./search-result/category-order');
 const axios = require('axios');
+const cors = require('cors');
 const port = 8080;
 require('dotenv').config();
 
 app.disable('x-powered-by');
+
+var corsOptions = {
+  origin: 'http://localhost:4200',
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+
 // FIRST SEND QUERY PARAM FOR SEARCH
-app.get('/items', function (req, res) {
+app.get('/items',cors(corsOptions), function (req, res) {
+
   if(req.query.hasOwnProperty('search')){
     axios.get(`${process.env.API_URL}sites/MLA/search?q=${req.query.search}`).then((response)=>{
       let category_object;

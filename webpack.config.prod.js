@@ -1,6 +1,6 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -12,6 +12,9 @@ module.exports = {
     filename: 'bundle.js'
   },
   optimization: {
+    splitChunks: {
+      chunks: 'all'
+    },
     minimizer: [
       new UglifyJsPlugin({
         cache: true,
@@ -59,7 +62,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/index.html'
+      template: './src/template-index.html'
     }),
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output

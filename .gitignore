@@ -54,6 +54,5 @@ typings/
 #vscode
 .vscode
 
-#external
-ui/dist
+dist
 api/dist

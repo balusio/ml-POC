@@ -13,22 +13,35 @@ class SearchItem extends Component {
       img: mockImage
     };
   }
-  render() {
+  shipping(){
     const backgroundImage = {
       backgroundImage: `url(${iconShipping})`
     }
     return (
-      <div className="search-result-container">
-        <Link to="/items/123456" className="search-result-element">
+     
+      <span className="free-shipping-icon" style={backgroundImage}></span>
+    )
+  }
+  setPriceFormat(priceObject){
+    return  (priceObject.amount).toLocaleString(priceObject.currency).replace(/,/g, '.');
+  }
+
+  render() {
+   
+    return (
+      <div className="search-result-container" key={this.props.product.id}>
+        <Link to={`/items/${this.props.product.id}`} className="search-result-element">
           <div className="img-elem-wrapper"> 
-            <img src={this.state.img} alt="mercado-libre"/>
+            <img src={this.props.product.picture} alt="mercado-libre"/>
           </div>
           <div className="text-elem-wrapper">
             <div className="location-elem-wrapper">
-              <h3>$ 1500 <span className="free-shipping-icon" style={backgroundImage}></span></h3>  
+              <h3>$ {this.setPriceFormat(this.props.product.price)}  
+              {this.props.product.shipping ? this.shipping() : ' '}
+              </h3>  
               <p className="location-descp">Capital Federal</p>
             </div>
-            <p className="description-elem"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam condimentum, ante quis mollis ullamcorper, nulla metus molestie diam, sit amet faucibus urna augue non orci. </p>
+            <p className="description-elem">{this.props.product.title} </p>
           </div>
         </Link>
       </div>

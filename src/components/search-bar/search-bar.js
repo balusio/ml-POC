@@ -6,9 +6,9 @@ import lupa from '../../assets/ic_Search.png';
 import lupa2x from '../../assets/ic_Search@2x.png';
 import logo_ML from '../../assets/logo_ML.png';
 import logo_ML2x from '../../assets/logo_ML@2x.png';
-class SearchBar extends Component {
-  constructor() {
-    super();
+import {withRouter} from 'react-router';class SearchBar extends Component {
+  constructor(props) {
+    super(props);
     this.state = {
       title: "hello washioooo",
       logo: logo_ML

@@ -4,6 +4,7 @@ import lupa from '../../../assets/ic_Search.png';
 import lupa2x from '../../../assets/ic_Search@2x.png';
 import { Redirect } from 'react-router';
 import {Link} from 'react-router-dom';
+import {withRouter} from 'react-router';
 class SearchForm extends Component {
   constructor(props) {
     super(props);
@@ -21,6 +22,7 @@ class SearchForm extends Component {
   handleSubmit(event){
     event.preventDefault();
     console.log(this.state.searchQuery);
+    console.log(this.props);
     const query = `/items?search=${this.state.searchQuery}`;
     this.props.history.push(query);
     
@@ -39,4 +41,4 @@ class SearchForm extends Component {
   }
 }
 
-export default SearchForm;
+export default withRouter(SearchForm);
