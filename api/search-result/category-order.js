@@ -24,7 +24,9 @@ function getName(objElement){
   return names;
 }
 
-
+exports.sortCategoryForItem = function(filters){
+  return getName(filters);
+}
 exports.sortCategory = function(filters) {
     let foundedElements = recursiveValuesCat(filters);
     let names = getName(foundedElements);
