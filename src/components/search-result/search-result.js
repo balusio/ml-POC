@@ -5,6 +5,7 @@ import './search-result.scss';
 import BreadCrumb from '../breadcrumb/breadcrumb-list';
 import {API_URL} from '../../env';
 import axios from 'axios';
+import Loader from '../loader/loader';
 class SearchResult extends Component {
   constructor() {
     super();
@@ -26,14 +27,7 @@ class SearchResult extends Component {
     return params;
   };
   }
-  loadingResults(){
-    return (
-      <div className="loader">
-        <div className="lds-loading"><div></div><div></div><div></div></div>
-      </div>
-      
-    )
-  }
+
   componentDidUpdate(prevProps) {
     if (this.props.location !== prevProps.location) {
       this.onRouteChanged();
@@ -54,12 +48,16 @@ class SearchResult extends Component {
         elements: response.data.items,
         loading: false
       });
+    }).catch((error) =>{
+      this.setState({loading: false});
+      console.error(error);
+
     })
   }
   render() {
     return (
       <div>
-        {this.state.loading ? this.loadingResults() : ' ' }
+        {this.state.loading ? <Loader /> : ' ' }
         <BreadCrumb elements={this.state.categories}/>
         <section className="container wrapper">
           <div className="search-wrapper"> 

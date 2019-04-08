@@ -1,25 +1,37 @@
 import React, { Component } from "react";
-import mockimage from '../../assets/image-iphone.png';
 import BreadCrumb from '../breadcrumb/breadcrumb-list';
-
 import {API_URL} from '../../env';
 import axios from 'axios';
+import Loader from '../loader/loader';
 import './item-detail.scss';
 class ItemDetail extends Component {
   constructor(props){
     super(props);
     this.state ={
-      categories:[],
-      product : {}
+      loading: false,
+      product : {
+        categories: [],
+        price:{
+          amount:0,
+          decimals:0,
+          currency: 'ARS'
+        }
+      }
     }
   }
+  setPriceFormat(priceObject){
+    return  (priceObject.amount).toLocaleString(priceObject.currency).replace(/,/g, '.');
+  }
   componentWillMount(){
+    this.setState({loading: true});
+  }
+  componentDidMount(){
     const itemId = this.props.match.params.id;
     axios.get(`${API_URL}/items/${itemId}`).then((response)=>{
       console.log(response.data);
       this.setState({
-        categories: response.data.categories,
-        //product: response.data.item
+        loading: false,
+        product: response.data
       });
     })
   }
@@ -27,26 +39,27 @@ class ItemDetail extends Component {
   render() {
     return(
       <div>
-        <BreadCrumb elements={this.state.categories}/>
+        <BreadCrumb elements={this.state.product.categories}/>
+        {this.state.loading ? <Loader /> : ' ' }
         <section className="container wrapper item-detail-result">
           <div className="item-result-specs"> 
             <div className="item-image-container">
-              <img src={mockimage} />
+              <img src={this.state.product.picture} />
             </div>
             <div className="item-result-container">
               <div className="item-result-text">
-                <span className="most-selled-element">Nuevo - 234 vendidos</span>
-                <h1> Deco reverse sombrero super canchero </h1>
+                <span className="most-selled-element">{this.state.product.sold_quantity} vendidos</span>
+                <h1> {this.state.product.title} </h1>
               </div>
               <div className="price-element"> 
-                  <span>$ 1.98000 <sup>00</sup></span> 
+                  <span>$ {this.setPriceFormat(this.state.product.price)} <sup>{this.state.product.price.decimals}</sup></span> 
                 </div>
             <button className="item-button-action" alt="comprar">Comprar</button>
             </div>
           </div>
           <div className="item-detail-description">
             <h3>Descripción del Producto</h3>
-            <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam condimentum, ante quis mollis ullamcorper, nulla metus molestie diam, sit amet faucibus urna augue non orci. </p>
+            <p> {this.state.product.description}</p>
           </div>
         </section>
       </div>

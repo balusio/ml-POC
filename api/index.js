@@ -30,7 +30,7 @@ var corsOptions = {
     }
   }
 }
-app.options('*', cors(corsOptions)) // include before other routes
+
 // FIRST SEND QUERY PARAM FOR SEARCH
 app.get('/items',cors(corsOptions), function (req, res) {
 
@@ -64,16 +64,28 @@ app.get('/items',cors(corsOptions), function (req, res) {
 /// USED PARAM URL FOR SENT
 app.get('/items/:id', cors(corsOptions), function (req, res) {
   let itemResponse;
+ 
+  const itemDescription = axios.get(`${process.env.API_URL}items/${req.params.id}/description/`);
+  // Get the items,
+  axios.get(`${process.env.API_URL}items/${req.params.id}`).then((response) =>{
+
+    const itemsCategory = axios.get(`${process.env.API_URL}categories/${response.data.category_id}`);
+    // get the description and the categories from the responses 
+    itemResponse = itemActions.productItem(response.data);
+     // make the secondary async call and get the categories and the descriptions 
+    Promise.all([itemsCategory, itemDescription]).then((response) => {
+      console.log(response[0].data)
+      itemResponse.categories =order_category.sortCategoryForItem(response[0].data.path_from_root);
+      itemResponse.description = response[1].data.plain_text;
+
+      
+      res.send(itemResponse);
   
-  var itemProperties =  axios.get(`${process.env.API_URL}items/${req.params.id}`);
-  var itemDescription = axios.get(`${process.env.API_URL}items/${req.params.id}/description/`);
-  Promise.all([itemProperties, itemDescription]).then((response) => {
-    console.log(response[0].data)
-    itemResponse = itemActions.productItem(response[0].data);
-    itemResponse.description = response[1].data.plain_text;
-    res.send(itemResponse);
+    }).catch(err => console.error(err));
 
   }).catch(err => console.error(err));
+  
+ 
 
 });
 
