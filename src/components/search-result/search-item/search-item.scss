@@ -1,11 +1,17 @@
 @import '../../../styles/commons.scss';
+.search-result-container{
+  padding: 0 16px;
+}
 .search-result-element{
   width: 100%;
   display: flex;
   flex-flow: row;
+  text-decoration: none;
+  color: inherit;
+  border-bottom: 1px solid $light-grey;
   .img-elem-wrapper{
     width: $column-total * 2;
-    margin: 16px;
+    margin: 16px 16px 16px 0;
     img{
       width: 180px;
       height: 180px;
