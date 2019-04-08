@@ -3,8 +3,8 @@ import { Route,Switch } from "react-router-dom";
 import SearchBar from './search-bar/search-bar';
 import SearchResult from './search-result/search-result'
 import Item from './item/item-detail';
-import {withRouter} from 'react-router';
 
+import '../styles/main.scss';
 class App extends Component {
   constructor(props) {
     super(props);    
@@ -18,9 +18,7 @@ class App extends Component {
           <Route exact path="/items/:id" component={Item} />
         </Switch>
       </div>
-   
-    
-  );
+    );
   }
 }
 

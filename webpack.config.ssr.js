@@ -2,34 +2,36 @@ const path = require('path');
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
-
+const webpackNodeExternals = require('webpack-node-externals');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = {
-  entry: './src/index.js',
+  entry: './server.js',
+  target:'node',
+  externals: [webpackNodeExternals()],
   output: {
     path: __dirname + '/dist',
-    publicPath: './',
-    filename: 'bundle.js'
+    publicPath: '/',
+    filename: 'server.js',
+    library: 'app',
+    libraryTarget: 'commonjs2'
   },
   optimization: {
-    splitChunks: {
-      chunks: 'all'
-    },
+    // splitChunks: {
+    //   chunks: 'all'
+    // },
     minimizer: [
       new UglifyJsPlugin({
-        cache: true,
-        parallel: true,
         sourceMap: false // set to true if you want JS source maps
       }),
       new OptimizeCSSAssetsPlugin({})
     ]
   },
   // devServer configure
-  devServer: {
-    contentBase: path.join(__dirname, 'dist'),
-    compress: true,
-    port: 4200
-  },
+  // devServer: {
+  //   contentBase: path.join(__dirname, 'dist'),
+  //   compress: true,
+  //   port: 4200
+  // },
   module: {
     rules: [
       {
@@ -60,10 +62,8 @@ module.exports = {
       }
     ]
   },
+
   plugins: [
-    // new HtmlWebpackPlugin({
-    //   template: './src/template-index.html'
-    // }),
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
       // both options are optional
