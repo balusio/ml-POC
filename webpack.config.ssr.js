@@ -16,9 +16,6 @@ module.exports = {
     libraryTarget: 'commonjs2'
   },
   optimization: {
-    // splitChunks: {
-    //   chunks: 'all'
-    // },
     minimizer: [
       new UglifyJsPlugin({
         sourceMap: false // set to true if you want JS source maps
@@ -26,12 +23,6 @@ module.exports = {
       new OptimizeCSSAssetsPlugin({})
     ]
   },
-  // devServer configure
-  // devServer: {
-  //   contentBase: path.join(__dirname, 'dist'),
-  //   compress: true,
-  //   port: 4200
-  // },
   module: {
     rules: [
       {
@@ -65,8 +56,7 @@ module.exports = {
 
   plugins: [
     new MiniCssExtractPlugin({
-      // Options similar to the same options in webpackOptions.output
-      // both options are optional
+     
       path:  'dist/',
       filename: 'css/style.css'
     })
