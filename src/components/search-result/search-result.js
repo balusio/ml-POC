@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import SearchItem from './search-item/search-item';
 import './search-result.scss';
 import BreadCrumb from '../breadcrumb/breadcrumb-list';
-import {API_URL} from '../../env';
+import {API_URL,AUTHOR_NAME,AUTHOR_LASTNAME} from '../../env';
 import axios from 'axios';
 import Loader from '../loader/loader';
 class SearchResult extends Component {

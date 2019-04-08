@@ -1,4 +1,4 @@
-// Resources 
+// Resources for investigation about perfomance response: 
 // https://stackoverflow.com/questions/6012242/whats-the-efficiency-in-big-o-notation-of-the-in-operator-or-obj-hasownproper
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
 // https://medium.com/@pyrolistical/destructuring-nested-objects-9dabdd01a3b8

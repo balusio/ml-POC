@@ -15,9 +15,9 @@ exports.setPrice= function(unformatedPrice,currency){
     formatedPrice.decimals = parseInt(formatedPrice.decimals);
     formatedPrice.amount = Math.trunc(formatedPrice.amount);
   }
- 
-  //  PASS REWPRESENTATION TO FRONT END
-  //formatedPrice.amount = formatedPrice.amount.toLocaleString(currency);
-  // formatedPrice.amount = formatedPrice.amount.replace(/,/g, '.');
-  return formatedPrice; 
+  return formatedPrice;
+  /*  PASS REPRESENTATION TO FRONT END this will make a better format of the response number
+  use formatedPrice.amount.toLocaleString(currency);
+  and formatedPrice.amount.replace(/,/g, '.');
+  */ 
 };
