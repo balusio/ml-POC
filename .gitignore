@@ -54,10 +54,5 @@ typings/
 #vscode
 .vscode
 
-<<<<<<< HEAD
-#external
-ui/dist
-=======
 dist
->>>>>>> develop
 api/dist

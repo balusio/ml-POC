@@ -18,8 +18,6 @@ const cors = require('cors');
 const port = 8080;
 require('dotenv').config();
 
-<<<<<<< HEAD
-=======
 app.disable('x-powered-by');
 
 var whitelist = ['http://localhost:3000','http://localhost:4200']
@@ -33,7 +31,6 @@ var corsOptions = {
   }
 }
 
->>>>>>> develop
 // FIRST SEND QUERY PARAM FOR SEARCH
 app.get('/items',cors(corsOptions), function (req, res) {
 
