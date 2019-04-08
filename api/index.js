@@ -20,11 +20,17 @@ require('dotenv').config();
 
 app.disable('x-powered-by');
 
+var whitelist = ['http://localhost:3000','http://localhost:4200']
 var corsOptions = {
-  origin: 'http://localhost:3000',
-  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
 }
-
+app.options('*', cors(corsOptions)) // include before other routes
 // FIRST SEND QUERY PARAM FOR SEARCH
 app.get('/items',cors(corsOptions), function (req, res) {
 
@@ -56,11 +62,13 @@ app.get('/items',cors(corsOptions), function (req, res) {
 });
 
 /// USED PARAM URL FOR SENT
-app.get('/items/:id', function (req, res) {
+app.get('/items/:id', cors(corsOptions), function (req, res) {
   let itemResponse;
+  
   var itemProperties =  axios.get(`${process.env.API_URL}items/${req.params.id}`);
   var itemDescription = axios.get(`${process.env.API_URL}items/${req.params.id}/description/`);
   Promise.all([itemProperties, itemDescription]).then((response) => {
+    console.log(response[0].data)
     itemResponse = itemActions.productItem(response[0].data);
     itemResponse.description = response[1].data.plain_text;
     res.send(itemResponse);

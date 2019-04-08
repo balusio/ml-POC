@@ -2,7 +2,7 @@ import React,{Component} from "react";
 import { Route,Switch } from "react-router-dom";
 import SearchBar from './search-bar/search-bar';
 import SearchResult from './search-result/search-result'
-import Item from './item/item-detail';
+import ItemDetail from './item-detail/item-detail';
 
 import '../styles/main.scss';
 class App extends Component {
@@ -15,7 +15,7 @@ class App extends Component {
         <SearchBar {...this.props} ></SearchBar>
         <Switch>
           <Route exact path="/items" component={SearchResult} />
-          <Route exact path="/items/:id" component={Item} />
+          <Route exact path="/items/:id" component={ItemDetail} />
         </Switch>
       </div>
     );

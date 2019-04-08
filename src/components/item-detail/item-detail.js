@@ -1,13 +1,33 @@
 import React, { Component } from "react";
-import './item-detail.scss';
 import mockimage from '../../assets/image-iphone.png';
 import BreadCrumb from '../breadcrumb/breadcrumb-list';
-class Item extends Component {
-  
+
+import {API_URL} from '../../env';
+import axios from 'axios';
+import './item-detail.scss';
+class ItemDetail extends Component {
+  constructor(props){
+    super(props);
+    this.state ={
+      categories:[],
+      product : {}
+    }
+  }
+  componentWillMount(){
+    const itemId = this.props.match.params.id;
+    axios.get(`${API_URL}/items/${itemId}`).then((response)=>{
+      console.log(response.data);
+      this.setState({
+        categories: response.data.categories,
+        //product: response.data.item
+      });
+    })
+  }
+
   render() {
     return(
       <div>
-        <BreadCrumb />
+        <BreadCrumb elements={this.state.categories}/>
         <section className="container wrapper item-detail-result">
           <div className="item-result-specs"> 
             <div className="item-image-container">
@@ -34,4 +54,4 @@ class Item extends Component {
   }
 }
 
-export default Item;
+export default ItemDetail;
