@@ -29,7 +29,16 @@ var corsOptions = {
   },
   'Cache-Control': 'max-age=86400',
   "methods": "GET",
+  'Access-Control-Allow-Headers': 'Authorization'
 }
+const authorizationTest = function(req, res, next) {
+  console.log()
+  if (!req.headers.authorization && req.headers.authorization!== process.env.AUTHOR_NAME + process.env.AUTHOR_LASTNAME) {
+    return res.status(403).json({ error: 'No credentials sent!' });
+  }
+  next();
+};
+
 app.disable('x-powered-by');
-app.use(compression(),cors(corsOptions),router);
+app.use(compression(),cors(corsOptions),authorizationTest,router);
 app.listen(port, () => console.log(`Mercado Libre API-handler listening on port ${port}! \n greetings from @balusio :D `))

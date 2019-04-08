@@ -6,6 +6,7 @@ import BreadCrumb from '../breadcrumb/breadcrumb-list';
 import {API_URL,AUTHOR_NAME,AUTHOR_LASTNAME} from '../../env';
 import axios from 'axios';
 import Loader from '../loader/loader';
+import '../../axios-config';
 class SearchResult extends Component {
   constructor() {
     super();

@@ -4,6 +4,7 @@ import {API_URL} from '../../env';
 import axios from 'axios';
 import Loader from '../loader/loader';
 import './item-detail.scss';
+import '../../axios-config';
 class ItemDetail extends Component {
   constructor(props){
     super(props);
